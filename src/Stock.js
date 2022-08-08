@@ -63,6 +63,7 @@ const xMax = width - margin.left - margin.right;
 const yMax = height - margin.top - margin.bottom;
 
 export default function Stock({ match }: Props): React.Node {
+  const [allEvents, setAllEvents] = React.useState([])
   const dispatch = useDispatch<Dispatch>();
   const chart = useSelector((state) => state.charts[match.params.symbol]);
   const quote = useSelector((state) => state.quotes[match.params.symbol]);
@@ -70,7 +71,7 @@ export default function Stock({ match }: Props): React.Node {
   React.useEffect(() => {
     dispatch(fetchSymbolData(match.params.symbol));
   }, [dispatch, match.params.symbol]);
-
+  var stock = ""
   let xScale;
   let yScale;
   if (chart != null) {
