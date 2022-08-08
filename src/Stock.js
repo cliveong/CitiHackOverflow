@@ -110,7 +110,7 @@ export default function Stock({ match }: Props): React.Node {
           <h4 className="mb-3">Summary</h4>
           <ul className="list-unstyled">
             <SummaryListItem
-              title="Predicted Risk"
+              title="Predicted Risk Sentiment"
               value={quote == null ? "..." : String(handlePrediction(match.params.symbol))}
             />
             <SummaryListItem
