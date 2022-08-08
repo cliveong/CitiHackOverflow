@@ -8,6 +8,8 @@ import Navbar from "./Navbar";
 import SpinKit from "./SpinKit";
 import { fetchAllQuotes } from "./actions";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import axios from "axios";
 
 // const Overview = React.lazy(() => import("./Overview"));
 const Performance = React.lazy(() => import("./Performance"));
@@ -30,7 +32,12 @@ export default function App(): React.Node {
   React.useEffect(() => {
     dispatch(fetchAllQuotes());
   }, [dispatch]);
+  // const [value, setValue] = useState("");
 
+  // axios.post("http://localhost:5001/sentiment", {"sentence": value})
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
   return (
     <Router>
       <div>
@@ -41,7 +48,7 @@ export default function App(): React.Node {
             See: React Router's ["Dealing With Update Blocking"][0] */}
         <Route component={Navbar} />
         <React.Suspense fallback={<LoadingIndicator />}>
-          {/* <Route exact path="/" component={Overview} /> */}
+          <Route exact path="/" component={Performance} />
           <Route path="/performance" component={Performance} />
           <Route path="/stocks/:symbol" component={Stock} />
           <Route path="/transactions" component={Transactions} />

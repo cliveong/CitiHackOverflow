@@ -2,6 +2,7 @@
   "name": "finance",
   "version": "1.0.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "author": "Ross Allen (https://github.com/ssorallen)",
   "homepage": "https://ssorallen.github.io/finance/",
   "dependencies": {
@@ -10,6 +11,7 @@
     "@vx/group": "^0.0.161",
     "@vx/scale": "^0.0.161",
     "@vx/shape": "^0.0.162",
+    "axios": "^0.27.2",
     "bootstrap": "^4.1.1",
     "classnames": "^2.2.5",
     "csv-parse": "^4.4.6",

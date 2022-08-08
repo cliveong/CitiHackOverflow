@@ -1,5 +1,6 @@
 /* @flow */
-
+import { useState } from "react";
+import axios from "axios";
 import * as React from "react";
 import { AxisLeft, AxisBottom } from "@vx/axis";
 import { Col, Container, Row } from "reactstrap";
@@ -13,12 +14,15 @@ import { deviation, extent, max, min } from "d3-array";
 import { scaleTime, scaleLinear } from "@vx/scale";
 import { useDispatch, useSelector } from "react-redux";
 import { AreaClosed } from "@vx/shape";
-import type { Dispatch } from "./types";
+import {
+  AdvancedChart,
+  CompanyProfile,
+  Timeline,
+} from "react-tradingview-embed";
 import { Group } from "@vx/group";
 import { LinearGradient } from "@vx/gradient";
 import cx from "classnames";
 import { fetchSymbolData } from "./actions";
-
 type Props = {
   match: Object,
 };
@@ -32,6 +36,15 @@ function SummaryListItem({ title, value }: { title: string, value: string }) {
       <strong>{value}</strong>
     </li>
   );
+}
+var risk = "No Risk"
+function handlePrediction(stock) {
+  axios.post("http://localhost:5001/sentiment", {"stock": stock})
+  .then((response) => {
+    console.log(response.data.sentiment)
+    risk = response.data.sentiment
+  })
+  return risk
 }
 
 const width = 635;
@@ -95,6 +108,10 @@ export default function Stock({ match }: Props): React.Node {
         <Col className="border-top border-top-lg pt-2" md="4">
           <h4 className="mb-3">Summary</h4>
           <ul className="list-unstyled">
+            <SummaryListItem
+              title="Predicted Risk"
+              value={quote == null ? "..." : String(handlePrediction(match.params.symbol))}
+            />
             <SummaryListItem
               title="Volume"
               value={quote == null ? "..." : wholeNumberFormatter.format(quote.latestVolume)}
@@ -196,6 +213,18 @@ export default function Stock({ match }: Props): React.Node {
               </Group>
             </svg>
           )}
+        </Col>
+        <Col>
+        <CompanyProfile
+            widgetPropsAny={{
+              symbol: match.params.symbol,
+              colorTheme: "light",
+              isTransparent: false,
+              locale: "en",
+              width: "100%",
+              height: "400",
+            }}
+          />
         </Col>
       </Row>
     </Container>
