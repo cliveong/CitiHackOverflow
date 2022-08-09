@@ -24,6 +24,16 @@ export default function PortfolioNav(): React.Node {
             Transactions
           </NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink className="nav-link" to="/riskassessment">
+            Risk Assessment
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="nav-link" to="/recommendations">
+            Recommendations
+          </NavLink>
+        </NavItem>
       </Nav>
     </div>
   );

@@ -16,6 +16,7 @@ const Performance = React.lazy(() => import("./Performance"));
 const Stock = React.lazy(() => import("./Stock"));
 const Transactions = React.lazy(() => import("./Transactions"));
 const RiskAssessment = React.lazy(() => import("./RiskAssessment"));
+const Recommendations = React.lazy(() => import("./Recommendations"));
 
 function LoadingIndicator() {
   return (
@@ -54,6 +55,7 @@ export default function App(): React.Node {
           <Route path="/stocks/:symbol" component={Stock} />
           <Route path="/transactions" component={Transactions} />
           <Route path="/riskassessment" component={RiskAssessment} />
+          <Route path="/recommendations" component={Recommendations} />
         </React.Suspense>
         <footer className="bg-light py-4">
           <Container>
@@ -71,17 +73,6 @@ export default function App(): React.Node {
                   <a className="link-secondary" href="https://iexcloud.io">
                     IEX Cloud
                   </a>
-                </small>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <small className="text-secondary">
-                  <Link to="riskassessment">
-                    <button>
-                      Risk Analysis
-                    </button>
-                  </Link>
                 </small>
               </Col>
             </Row>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import Select from 'react-select'
-import { Button } from 'reactstrap'
+import Select from 'react-select';
+import { Button } from 'reactstrap';
+import "./RiskAssessment.css";
+import PortfolioNav from "./PortfolioNav";
 
 
 const options1 = [
@@ -54,50 +56,58 @@ const options7 = [
 
 
 export default function Riskassessment() {
-    const [count1, setCount1] = useState("1");
-    const [count2, setCount2] = useState("1");
-    const [count3, setCount3] = useState("1");
-    const [count4, setCount4] = useState("1");
-    const [count5, setCount5] = useState("1");
-    const [count6, setCount6] = useState("1");
-    const [count7, setCount7] = useState("1");
+    const [visible, setVisible] = useState(false);
+    const [risk, setRisk] = useState("");
+    const [count1, setCount1] = useState('0');
+    const [count2, setCount2] = useState('0');
+    const [count3, setCount3] = useState('0');
+    const [count4, setCount4] = useState('0');
+    const [count5, setCount5] = useState('0');
+    const [count6, setCount6] = useState('0');
+    const [count7, setCount7] = useState('0');
     
     function calcResults() {
         let totalSum = Number(count1) +  Number(count2) + Number(count3)
          + Number(count4) +  Number(count5) + Number(count6) + Number(count7);
 
+         console.log(count1);
          console.log(totalSum);
-        if (totalSum <= 14) {
-            //low risk
+        if (totalSum < 7) {
+            setRisk("");
+        } else if (totalSum <= 14) {
+            setRisk("low risk");
         } else if (totalSum <= 21) {
-            //med risk
+            setRisk("med risk");
         } else {
-            //highrisk
+            setRisk("high risk");
         }
+        setVisible(true);
     }
 
     return (
+
         <div>
+            <PortfolioNav />
             <label> I plan on using the money I am investing:</label>
-            <Select options={options1} onChange={setCount1}></Select>
+            <Select options={options1} onChange={(e) => setCount1(e.value)}></Select>
 
             <label>My investments make up this share of assets (excluding home):</label>
-            <Select options={options2} onChange={setCount2}></Select>
+            <Select options={options2} onChange={(e) => setCount2(e.value)}></Select>
 
             <label> I expect my future income to:</label>
-            <Select options={options3} onChange={setCount3}></Select>
+            <Select options={options3} onChange={(e) => setCount3(e.value)}></Select>
 
             <label> I have emergency savings:</label>
-            <Select options={options4} onChange={setCount4}></Select>
+            <Select options={options4} onChange={(e) => setCount4(e.value)}></Select>
 
             <label> I have invested in stocks and stock mutual funds:</label>
-            <Select options={options5} onChange={setCount5}></Select>
+            <Select options={options5} onChange={(e) => setCount5(e.value)}></Select>
 
             <label>I would risk this share of my portfolio in exchange for the same probability of doubling my money:</label>
-            <Select options={options6} onChange={setCount6}></Select>
+            <Select options={options6} onChange={(e) => setCount6(e.value)}></Select>
 
             <label>My most important investment goal is to: </label>
-            <Select options={options7} onChange={setCount7}></Select>
+            <Select options={options7} onChange={(e) => setCount7(e.value)}></Select>
 
             <Button onClick={calcResults}>
                 Get results
@@ -105,9 +115,11 @@ export default function Riskassessment() {
 
             <div>
                 Your risk tolerance is:
-                <div>
-                    tell them the risk here
-                </div>
+                {visible && (<div>
+                    <text>
+                        {risk}
+                    </text>
+                </div>)}
             </div>
 
         </div>
