@@ -18,11 +18,13 @@ import {
   AdvancedChart,
   CompanyProfile,
   Timeline,
+  TechnicalAnalysis
 } from "react-tradingview-embed";
 import { Group } from "@vx/group";
 import { LinearGradient } from "@vx/gradient";
 import cx from "classnames";
 import { fetchSymbolData } from "./actions";
+
 type Props = {
   match: Object,
 };
@@ -148,84 +150,53 @@ export default function Stock({ match }: Props): React.Node {
               }
             />
           </ul>
+          <TechnicalAnalysis
+            widgetPropsAny={{
+              symbol: match.params.symbol,
+              colorTheme: "light",
+              isTransparent: false,
+              locale: "en",
+              width: "370",
+              height: "400",
+            }}
+          />
         </Col>
         <Col className="border-top border-top-lg pt-2" md={{ offset: 1, size: 7 }}>
           <h4 className="mb-3">History</h4>
-          {chart == null ? (
-            <div
-              className="text-center"
-              style={{
-                backgroundColor: "#343a40",
-                borderRadius: "0.25rem",
-                color: "#fff",
-                height: `${height}px`,
-                lineHeight: `${height}px`,
-              }}
-            >
-              Loading...
-            </div>
-          ) : (
-            <svg width={width} height={height}>
-              <rect x={0} y={0} width={width} height={height} fill="#343a40" rx={"0.25rem"} />
-              <LinearGradient id="gradient">
-                <stop offset="0%" stopColor="#ffc107" stopOpacity={1} />
-                <stop offset="100%" stopColor="#ffc107" stopOpacity={0.2} />
-              </LinearGradient>
-              <Group top={margin.top} left={margin.left}>
-                <AreaClosed
-                  data={chart}
-                  xScale={xScale}
-                  yScale={yScale}
-                  x={x}
-                  y={y}
-                  fill={"url(#gradient)"}
-                  stroke={""}
-                />
-                <AxisLeft
-                  left={0}
-                  scale={yScale}
-                  stroke={"rgba(255,255,255,0.3)"}
-                  top={0}
-                  tickLabelProps={(val, i) => ({
-                    dx: "-0.25em",
-                    dy: "0.25em",
-                    textAnchor: "end",
-                    fontFamily: "Arial",
-                    fontSize: 10,
-                    fill: "rgba(255,255,255,0.9)",
-                  })}
-                  tickStroke={"rgba(255,255,255,0.3)"}
-                  tickTextFill={"rgba(255,255,255,0.3)"}
-                />
-                <AxisBottom
-                  scale={xScale}
-                  stroke={"rgba(255,255,255,0.3)"}
-                  top={yMax}
-                  tickLabelProps={(val, i) => ({
-                    dy: "0.25em",
-                    textAnchor: "middle",
-                    fontFamily: "Arial",
-                    fontSize: 10,
-                    fill: "rgba(255,255,255,0.9)",
-                  })}
-                  tickStroke={"rgba(255,255,255,0.3)"}
-                  tickTextFill={"rgba(255,255,255,0.3)"}
-                />
-              </Group>
-            </svg>
-          )}
-        </Col>
-        <Col>
-        <CompanyProfile
+          <Col span={24} xl={{ span: 12 }}>
+          <CompanyProfile
             widgetPropsAny={{
               symbol: match.params.symbol,
               colorTheme: "light",
               isTransparent: false,
               locale: "en",
               width: "100%",
-              height: "400",
+              popup_height: "650",
+              popup_width: "1000",
+              height: "300",
             }}
           />
+          <AdvancedChart
+            widgetPropsAny={{
+              symbol: match.params.symbol,
+              width: "100%",
+              interval: "D",
+              timezone: "Asia/Singapore",
+              theme: "light",
+              style: "1",
+              locale: "en",
+              toolbar_bg: "#f1f3f6",
+              enable_publishing: false,
+              withdateranges: true,
+              allow_symbol_change: true,
+              show_popup_button: true,
+              popup_width: "1000",
+              popup_height: "650",
+              hide_side_toolbar: true,
+              height: "400"
+            }}
+          />
+        </Col>
         </Col>
       </Row>
     </Container>
