@@ -2,7 +2,7 @@
 
 import "./App.css";
 import * as React from "react";
-import { HashRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 import Navbar from "./Navbar";
 import SpinKit from "./SpinKit";
@@ -15,6 +15,7 @@ import axios from "axios";
 const Performance = React.lazy(() => import("./Performance"));
 const Stock = React.lazy(() => import("./Stock"));
 const Transactions = React.lazy(() => import("./Transactions"));
+const RiskAssessment = React.lazy(() => import("./RiskAssessment"));
 
 function LoadingIndicator() {
   return (
@@ -52,6 +53,7 @@ export default function App(): React.Node {
           <Route path="/performance" component={Performance} />
           <Route path="/stocks/:symbol" component={Stock} />
           <Route path="/transactions" component={Transactions} />
+          <Route path="/riskassessment" component={RiskAssessment} />
         </React.Suspense>
         <footer className="bg-light py-4">
           <Container>
@@ -69,6 +71,17 @@ export default function App(): React.Node {
                   <a className="link-secondary" href="https://iexcloud.io">
                     IEX Cloud
                   </a>
+                </small>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <small className="text-secondary">
+                  <Link to="riskassessment">
+                    <button>
+                      Risk Analysis
+                    </button>
+                  </Link>
                 </small>
               </Col>
             </Row>
