@@ -57,6 +57,7 @@ const options7 = [
 
 export default function Riskassessment() {
     const [visible, setVisible] = useState(false);
+    const [error, setError] = useState(false);
     const [risk, setRisk] = useState("");
     const [count1, setCount1] = useState('0');
     const [count2, setCount2] = useState('0');
@@ -70,56 +71,86 @@ export default function Riskassessment() {
         let totalSum = Number(count1) +  Number(count2) + Number(count3)
          + Number(count4) +  Number(count5) + Number(count6) + Number(count7);
 
-         console.log(count1);
+         console.log(count2);
          console.log(totalSum);
         if (totalSum < 7) {
             setRisk("");
+            setError(true);
+            setVisible(false);
         } else if (totalSum <= 14) {
-            setRisk("low risk");
+            setRisk(" low");
+            setVisible(true);
+            setError(false);
         } else if (totalSum <= 21) {
-            setRisk("med risk");
+            setRisk(" medium");
+            setVisible(true);
+            setError(false);
         } else {
-            setRisk("high risk");
+            setRisk(" high");
+            setVisible(true);
+            setError(false);
         }
-        setVisible(true);
     }
 
     return (
 
         <div>
             <PortfolioNav />
-            <label class="label"> I plan on using the money I am investing:</label>
-            <Select options={options1} onChange={(e) => setCount1(e.value)}></Select>
+            <div className='wrapper'>
+                <div>
+                    <label class="label"> I plan on using the money I am investing:</label>
+                    <Select options={options1} onChange={(e) => setCount1(e.value)}></Select>
+                </div>
 
-            <label class="label">My investments make up this share of assets (excluding home):</label>
-            <Select options={options2} onChange={(e) => setCount2(e.value)}></Select>
+                <div>
+                    <label class="label">My investments make up this share of assets (excluding home):</label>
+                    <Select options={options2} onChange={(e) => setCount2(e.value)}></Select>
+                </div>
 
-            <label class="label"> I expect my future income to:</label>
-            <Select options={options3} onChange={(e) => setCount3(e.value)}></Select>
+                <div>
+                    <label class="label"> I expect my future income to:</label>
+                    <Select options={options3} onChange={(e) => setCount3(e.value)}></Select>
+                </div>
 
-            <label class="label"> I have emergency savings:</label>
-            <Select options={options4} onChange={(e) => setCount4(e.value)}></Select>
+                <div>
+                    <label class="label"> I have emergency savings:</label>
+                    <Select options={options4} onChange={(e) => setCount4(e.value)}></Select>
+                </div>
 
-            <label class="label"> I have invested in stocks and stock mutual funds:</label>
-            <Select options={options5} onChange={(e) => setCount5(e.value)}></Select>
+                <div>
+                    <label class="label"> I have invested in stocks and stock mutual funds:</label>
+                    <Select options={options5} onChange={(e) => setCount5(e.value)}></Select>
+                </div>
 
-            <label class="label">I would risk this share of my portfolio in exchange for the same probability of doubling my money:</label>
-            <Select options={options6} onChange={(e) => setCount6(e.value)}></Select>
+                <div>
+                    <label class="label">I would risk this share of my portfolio in exchange for the same probability of doubling my money:</label>
+                    <Select options={options6} onChange={(e) => setCount6(e.value)}></Select>
+                </div>
 
-            <label class="label">My most important investment goal is to: </label>
-            <Select options={options7} onChange={(e) => setCount7(e.value)}></Select>
+                <div>
+                    <label class="label">My most important investment goal is to: </label>
+                    <Select options={options7} onChange={(e) => setCount7(e.value)}></Select>
+                </div>
 
-            <Button class="label" onClick={calcResults}>
-                Get results
-            </Button>
+                <Button class="label" onClick={calcResults}>
+                    Get results
+                </Button>
 
-            <div class="label">
-                Your risk tolerance is:
-                {visible && (<div class="label">
-                    <text>
-                        {risk}
-                    </text>
-                </div>)}
+                <div class="riskLevel">
+                    {visible && (<div class="riskLevel">
+                        Your risk tolerance is:
+                        <text>
+                            {risk}
+                        </text>
+                    </div>)}
+                </div>
+
+                <div class="showError">
+                    {error && (<div class="label">
+                        The form is incomplete
+                    </div>)}
+                </div>
+
             </div>
 
         </div>
