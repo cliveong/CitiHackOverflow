@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from "./Context";
+import { Link } from "react-router-dom";
 import Select from 'react-select';
 import { Button, ButtonGroup } from 'reactstrap';
 import PortfolioNav from "./PortfolioNav";
 import "./login.css";
 
-export default function Login() {
+export default function() {
+    const [user, setUser] = useContext(Context);
     return (
-
+        <div>
+        <Link to="/performance" onClick={() => setUser("banker")}>
+            <button> Banker</button>
+        </Link>
+        <Link to="/performance" onClick={() => setUser("client")}>
+            <button> Client</button>
+        </Link>
         <form className='loginForm'>
             <div className='wrapper'>
             <>
@@ -42,5 +51,6 @@ export default function Login() {
             </Button>
             </div>
         </form>
+        </div>
     );
 }
