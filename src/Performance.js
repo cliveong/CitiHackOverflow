@@ -315,7 +315,7 @@ class Performance extends React.Component<Props, State> {
     const deleteDisabled = this.props.symbols.length === 0 || this.state.selectedSymbols.size === 0;
     return (
       <> 
-            <PortfolioContainer
+            <PortfolioContainer value={this.state.value}
         deleteDisabled={deleteDisabled}
         onDelete={this.handleDeleteSelectedSymbols}
       >

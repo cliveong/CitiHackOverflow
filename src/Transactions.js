@@ -155,7 +155,7 @@ class Transactions extends React.Component<Props, State> {
     const deleteDisabled =
       this.props.transactions.length === 0 || this.state.selectedTransactionIds.size === 0;
     return (
-      <PortfolioContainer
+      <PortfolioContainer value={this.state.value}
         deleteDisabled={deleteDisabled}
         onDelete={this.handleDeleteSelectedTransactions}
       >

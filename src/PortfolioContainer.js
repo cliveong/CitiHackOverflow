@@ -68,7 +68,7 @@ export default function Portfolio({ children, deleteDisabled, onDelete }: Props)
 
   return (
     <>
-      <PortfolioNav />
+      <PortfolioNav/>
       <Container fluid>
         <Row className="mb-3 mt-3">
           <Col>

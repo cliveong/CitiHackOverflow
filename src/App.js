@@ -10,6 +10,7 @@ import { fetchAllQuotes } from "./actions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
+import { Context } from "./Context";
 
 // const Overview = React.lazy(() => import("./Overview"));
 const Performance = React.lazy(() => import("./Performance"));
@@ -17,6 +18,8 @@ const Stock = React.lazy(() => import("./Stock"));
 const Transactions = React.lazy(() => import("./Transactions"));
 const RiskAssessment = React.lazy(() => import("./RiskAssessment"));
 const Recommendations = React.lazy(() => import("./Recommendations"));
+const Login = React.lazy(() => import("./Login"));
+const StockSelection = React.lazy(() => import("./StockSelection"));
 
 function LoadingIndicator() {
   return (
@@ -30,6 +33,7 @@ function LoadingIndicator() {
 }
 
 export default function App(): React.Node {
+  const [user, setUser] = useState(false);
   const dispatch = useDispatch<Dispatch>();
   React.useEffect(() => {
     dispatch(fetchAllQuotes());
@@ -41,45 +45,48 @@ export default function App(): React.Node {
   //       console.log(response);
   //     })
   return (
-    <Router>
-      <div>
-        {/* Wrap the `Navbar` in a pathless route to ensure it is always rendered and always updates
-            on navigation. Updates are blocked because internally the `Navbar` is wrapped by
-            react-redux's `connect`.
+    <Context.Provider value={[user,setUser]}>
+      <Router>
+        <div>
+          {/* Wrap the `Navbar` in a pathless route to ensure it is always rendered and always updates
+              on navigation. Updates are blocked because internally the `Navbar` is wrapped by
+              react-redux's `connect`.
 
-            See: React Router's ["Dealing With Update Blocking"][0] */}
-        <Route component={Navbar} />
-        <React.Suspense fallback={<LoadingIndicator />}>
-          <Route exact path="/" component={Performance} />
-          <Route path="/performance" component={Performance} />
-          <Route path="/stocks/:symbol" component={Stock} />
-          <Route path="/transactions" component={Transactions} />
-          <Route path="/riskassessment" component={RiskAssessment} />
-          <Route path="/recommendations" component={Recommendations} />
-        </React.Suspense>
-        <footer className="bg-light py-4">
-          <Container>
-            <Row>
-              <Col>
-                <small className="text-secondary">
-                  Created by AlphaLab
-                </small>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <small className="text-secondary">
-                  Data provided by{" "}
-                  <a className="link-secondary" href="https://iexcloud.io">
-                    IEX Cloud
-                  </a>
-                </small>
-              </Col>
-            </Row>
-          </Container>
-        </footer>
-      </div>
-    </Router>
+              See: React Router's ["Dealing With Update Blocking"][0] */}
+          <Route component={Navbar} />
+          <React.Suspense fallback={<LoadingIndicator />}>
+            <Route exact path="/" component={Login} />
+            <Route path="/performance" component={Performance} />
+            <Route path="/stocks/:symbol" component={Stock} />
+            <Route path="/transactions" component={Transactions} />
+            <Route path="/riskassessment" component={RiskAssessment} />
+            <Route path="/recommendations" component={Recommendations} />
+            <Route path="/stockSelection" component={StockSelection} />
+          </React.Suspense>
+          <footer className="bg-light py-4">
+            <Container>
+              <Row>
+                <Col>
+                  <small className="text-secondary">
+                    Created by AlphaLab
+                  </small>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <small className="text-secondary">
+                    Data provided by{" "}
+                    <a className="link-secondary" href="https://iexcloud.io">
+                      IEX Cloud
+                    </a>
+                  </small>
+                </Col>
+              </Row>
+            </Container>
+          </footer>
+        </div>
+      </Router>
+    </Context.Provider>
   );
 }
 
