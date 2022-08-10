@@ -88,34 +88,34 @@ export default function Riskassessment() {
 
         <div>
             <PortfolioNav />
-            <label> I plan on using the money I am investing:</label>
+            <label class="label"> I plan on using the money I am investing:</label>
             <Select options={options1} onChange={(e) => setCount1(e.value)}></Select>
 
-            <label>My investments make up this share of assets (excluding home):</label>
+            <label class="label">My investments make up this share of assets (excluding home):</label>
             <Select options={options2} onChange={(e) => setCount2(e.value)}></Select>
 
-            <label> I expect my future income to:</label>
+            <label class="label"> I expect my future income to:</label>
             <Select options={options3} onChange={(e) => setCount3(e.value)}></Select>
 
-            <label> I have emergency savings:</label>
+            <label class="label"> I have emergency savings:</label>
             <Select options={options4} onChange={(e) => setCount4(e.value)}></Select>
 
-            <label> I have invested in stocks and stock mutual funds:</label>
+            <label class="label"> I have invested in stocks and stock mutual funds:</label>
             <Select options={options5} onChange={(e) => setCount5(e.value)}></Select>
 
-            <label>I would risk this share of my portfolio in exchange for the same probability of doubling my money:</label>
+            <label class="label">I would risk this share of my portfolio in exchange for the same probability of doubling my money:</label>
             <Select options={options6} onChange={(e) => setCount6(e.value)}></Select>
 
-            <label>My most important investment goal is to: </label>
+            <label class="label">My most important investment goal is to: </label>
             <Select options={options7} onChange={(e) => setCount7(e.value)}></Select>
 
-            <Button onClick={calcResults}>
+            <Button class="label" onClick={calcResults}>
                 Get results
             </Button>
 
-            <div>
+            <div class="label">
                 Your risk tolerance is:
-                {visible && (<div>
+                {visible && (<div class="label">
                     <text>
                         {risk}
                     </text>
