@@ -31,24 +31,26 @@ export default function() {
             </>
 
             <div className='inputs'>
-                <label>
-                    Username:
-                </label>
-                <input type="text"/>
+                <input type="text" placeholder=' Username'/>
 
+                <input type="password" placeholder=" ******"/>
+            </div>
+            <div className='flexRow'>
                 <label>
-                    Password:
+                    Remember me
+                    <input type="checkbox">
+                    </input>
                 </label>
-                <input type="password"/>
+
+                <Button className="Forget">
+                    Forgot Username/Password
+                </Button>
             </div>
 
             <Button className="Login">
                 Login
             </Button>
 
-            <Button className="Forget">
-                Forget Username/Password?
-            </Button>
             </div>
         </form>
         </div>
