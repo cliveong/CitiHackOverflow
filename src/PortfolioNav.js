@@ -13,9 +13,9 @@ export default function PortfolioNav(props): React.Node {
     <div className="bg-light shadow-sm nav-scroller">
       <Nav className="nav-portfolio" role="navigation">
         <NavItem>
-          {/* <NavLink className="nav-link" exact to="/">
-            Overview
-          </NavLink> */}
+          <NavLink className="nav-link" exact to="/login">
+            login
+          </NavLink>
         </NavItem>
         <NavItem>
           <NavLink className="nav-link" to="/performance">
