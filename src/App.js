@@ -17,6 +17,7 @@ const Stock = React.lazy(() => import("./Stock"));
 const Transactions = React.lazy(() => import("./Transactions"));
 const RiskAssessment = React.lazy(() => import("./RiskAssessment"));
 const Recommendations = React.lazy(() => import("./Recommendations"));
+const Login = React.lazy(() => import("./login"));
 
 function LoadingIndicator() {
   return (
@@ -55,6 +56,7 @@ export default function App(): React.Node {
           <Route path="/stocks/:symbol" component={Stock} />
           <Route path="/transactions" component={Transactions} />
           <Route path="/riskassessment" component={RiskAssessment} />
+          <Route path="/login" component={Login} />
           <Route path="/recommendations" component={Recommendations} />
         </React.Suspense>
         <footer className="bg-light py-4">

@@ -1,0 +1,28 @@
+.inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    width: 300px;
+    margin: 0 0 20px 0;
+}
+
+.Login {
+    background-color: lightblue;
+    display: block;
+    margin: 0 0 5px 0;
+}
+
+.Forget {
+    display: block;
+    font-size: 0.6rem;
+    margin: 0 0 5px 0;
+}
+
+.loginForm {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
