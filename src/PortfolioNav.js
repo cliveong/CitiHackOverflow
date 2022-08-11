@@ -4,7 +4,7 @@ import "./PortfolioNav.css";
 import * as React from "react";
 import { useState, useContext } from 'react';
 import { Nav, NavItem } from "reactstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Context } from "./Context";
 
 export default function PortfolioNav(props): React.Node {
@@ -37,6 +37,11 @@ export default function PortfolioNav(props): React.Node {
             Stock Selection
           </NavLink>
         </NavItem>)}
+        <NavItem>
+          <Link className="nav-link" to="/">
+            Logout
+          </Link>
+        </NavItem>
       </Nav>
     </div>
   );

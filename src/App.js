@@ -34,6 +34,7 @@ function LoadingIndicator() {
 
 export default function App(): React.Node {
   const [user, setUser] = useState(false);
+  const [data, setData] = useState([{index: 1, ticker: "GME", risk:"High", date:"11/8/22", comment:"Do not buy"}]);
   const dispatch = useDispatch<Dispatch>();
   React.useEffect(() => {
     dispatch(fetchAllQuotes());
@@ -45,7 +46,7 @@ export default function App(): React.Node {
   //       console.log(response);
   //     })
   return (
-    <Context.Provider value={[user,setUser]}>
+    <Context.Provider value={[user,setUser,data, setData]}>
       <Router>
         <div>
           {/* Wrap the `Navbar` in a pathless route to ensure it is always rendered and always updates
@@ -53,15 +54,22 @@ export default function App(): React.Node {
               react-redux's `connect`.
 
               See: React Router's ["Dealing With Update Blocking"][0] */}
-          <Route component={Navbar} />
+          {/* <Route component={Navbar} /> */}
           <React.Suspense fallback={<LoadingIndicator />}>
             <Route exact path="/" component={Login} />
-            <Route path="/performance" component={Performance} />
+            <Route path="/performance" render={() => <><Navbar/><Performance /></>} />
             <Route path="/stocks/:symbol" component={Stock} />
+            <Route path="/transactions" render={() => <><Navbar/><Transactions /></>} />
+            <Route path="/riskassessment" render={() => <><Navbar/><RiskAssessment /></>} />
+            <Route path="/recommendations" render={() => <><Navbar/><Recommendations /></>} />
+            <Route path="/stockSelection" render={() => <><Navbar/><StockSelection /></>} />
+            
+            {/* <Route path="/performance" component={Performance}/>
+            <Route path="/stocks/:symbol" component={Stock}/>
             <Route path="/transactions" component={Transactions} />
             <Route path="/riskassessment" component={RiskAssessment} />
             <Route path="/recommendations" component={Recommendations} />
-            <Route path="/stockSelection" component={StockSelection} />
+            <Route path="/stockSelection" component={StockSelection}/> */}
           </React.Suspense>
           <footer className="bg-light py-4">
             <Container>

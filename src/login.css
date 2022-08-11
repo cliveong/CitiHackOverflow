@@ -11,7 +11,7 @@
 }
 
 .inputs > input[type="text"] {
-    margin-top: 40px;
+    margin-top: 10px;
 }
 .Login {
     background-color: lightblue;
@@ -75,4 +75,11 @@ input[type="checkbox"] {
 .loginEmpBtn, .loginClientBtn{
     width: 150px;
 }
-  
+
+.title {
+    color: rgb(247, 182, 3);
+    font-size: 3rem;
+    width: 300px;
+    text-align: center;
+    margin-bottom: 50px;
+}

@@ -3,7 +3,6 @@ import { Context } from "./Context";
 import { Link } from "react-router-dom";
 import Select from 'react-select';
 import { Button, ButtonGroup } from 'reactstrap';
-import PortfolioNav from "./PortfolioNav";
 import "./login.css";
 
 export default function() {
@@ -12,34 +11,32 @@ export default function() {
     const [employeesBtn, setEsmployeesBtn] = useState(false);
     return (
         <div>
-        <Link to="/performance" onClick={() => setUser("banker")}>
-            <button> Banker</button>
-        </Link>
-        <Link to="/performance" onClick={() => setUser("client")}>
-            <button> Client</button>
-        </Link>
         <form className='loginForm'>
             <div className='wrapper'>
+            <div className='title'>
+                <text>
+                    Investr
+                </text>
+            </div>
             <>
                 <ButtonGroup className="my-2" size="sm" style={{width:"300px"}}>
                     <Button outline 
                     className="loginClientBtn"
                     style={{width:"150px"}}
-                    onClick={() => {setClientBtn(!clientBtn); setEsmployeesBtn(!employeesBtn)}}
+                    onClick={() => {setClientBtn(true); setEsmployeesBtn(false)}}
                     active={clientBtn}>
                     Client
                     </Button>
                     <Button outline
                     className="loginEmpBtn"
                     style={{width:"150px"}}
-                    onClick={() => {setClientBtn(!clientBtn); setEsmployeesBtn(!employeesBtn)}}
+                    onClick={() => {setClientBtn(false); setEsmployeesBtn(true)}}
                     active={employeesBtn}>
                     Employees
                     </Button>
                 </ButtonGroup>
                 <br />
             </>
-
             <div className='inputs'>
                 <input type="text" placeholder=' Username'/>
 
@@ -56,11 +53,11 @@ export default function() {
                     Forgot Username/Password
                 </Button>
             </div>
-
-            <Button className="Login">
-                Login
-            </Button>
-
+            <Link to="/performance" onClick={() => clientBtn ? setUser("client"): setUser("banker")}>
+                <Button className="Login">
+                    Login
+                </Button>
+            </Link>
             </div>
         </form>
         </div>

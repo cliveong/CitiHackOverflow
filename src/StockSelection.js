@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PortfolioNav from "./PortfolioNav";
 import "./StockSelection.css";
 import Select from 'react-select';
-import { Button } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import ReactDOM from 'react-dom';
 import { Pie, measureTextWidth } from '@ant-design/plots';
+import { Context } from "./Context";
 
 const riskLevels = [
     { value: '1', label: '' },
@@ -95,25 +96,53 @@ export default function() {
 
     function dropDown() {
         return (
-                <Select className='selectRisk' options={riskLevels} />
+                <Select className='selectRisk' options={riskLevels} onChange={e => setRisk(e.label)}/>
         )
     }
 
-    function buttons() {
+    function buttons(index) {
         return (
             <>
-                <Button className="stockEditBtn">Edit</Button>
-                <Button className="stockDeleteBtn">Delete</Button>
+                {/* <Button className="stockEditBtn" onClick={()=> null}>Edit</Button> */}
+                <Button className="stockDeleteBtn" onClick={() => deleteData(index)}>Delete</Button>
             </>
         )
     }
 
+    function addData() {
+      setData([...data, {index: data.length + 1, ticker: stk, risk:risk, date:currDate, comment:comment}]);
+      setShow(false);
+      // console.log(data);
+      // console.log(stk);
+      // console.log(comment);
+      // console.log(risk);
+    }
+
+    function deleteData(index) {
+      const newData = [...data];
+      newData.splice(index - 1, 1);
+      newData.forEach(element => {
+        element.index = newData.indexOf(element, 0) + 1;
+      });
+      console.log(newData);
+      setData(newData);
+    }
+
+    const time = new Date();
+    const currDate = `${time.getDate()}/${time.getMonth()+1}/${time.getFullYear()}`;
+    const [user, setUser, data, setData] = useContext(Context);
+    const [show, setShow] = useState(false);
+    const [stk, setStk] = useState("");
+    const [comment, setComment] = useState("");
+    const [risk, setRisk] = useState("High");
 
     return (
+
         <div>
             <PortfolioNav/>
             <div className='stockDonutContainer'>{DemoPie()}</div>
-            <text>Recommendations</text>
+            <text>Recommendations: </text>
+            <button className="stockEditBtn" onClick={() => setShow(true)}>Add</button>
             <table className='stockTable'>
                 <thead className='stockthead'>
                     <tr className='stocktheadtr stocktr'>
@@ -125,57 +154,39 @@ export default function() {
                         <th></th>
                     </tr>
                 </thead>
+                {data.map((stock) => (
                 <tbody  className='stocktbody'>
                     <tr className='stocktbodytr stocktr'>
-                        <td>1</td>
-                        <td>GME</td>
-                        <td>{dropDown()}</td>
-                        <td>11/8/22s</td>
-                        <td>Do not buy</td>
-                        <td>{buttons()}</td>
-                    </tr> 
-                    <tr className='stocktbodytr stocktr'>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr> 
-                    <tr className='stocktbodytr stocktr'>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr> 
-                    <tr className='stocktbodytr stocktr'>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr> 
-                    <tr className='stocktbodytr stocktr'>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr> 
-                    <tr className='stocktbodytr stocktr'>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr> 
+                        <td>{stock.index}</td>
+                        <td>{stock.ticker}</td>
+                        <td>{stock.risk}</td>
+                        <td>{stock.date}</td>
+                        <td>{stock.comment}</td>
+                        <td>{buttons(stock.index)}</td>
+                    </tr>
                 </tbody>
+                ))}
             </table>
+            <Modal isOpen={show}>
+                  <ModalBody>
+                    <div class="label">
+                      <text>Stock</text>
+                      <input onChange={(e) => setStk(e.target.value)}></input>
+                    </div>
+                    <div class="label">
+                      <text>Comments</text>
+                      <input onChange={(e) => setComment(e.target.value)}></input>
+                    </div>
+                    <div class="label">
+                      <text>Risk level</text>
+                      {dropDown()}
+                    </div>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button onClick={addData}>Add</Button>
+                    <Button onClick={()=> setShow(false)}>Close</Button>
+                  </ModalFooter>
+            </Modal>
         </div>
         
     );
