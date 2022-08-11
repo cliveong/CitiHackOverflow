@@ -62,4 +62,17 @@ input[type="checkbox"] {
     top: 3.5px;
     left: 2px
 }
+
+.wrapper {
+    width: 400px;
+    padding: 50px;
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+    margin: 50px;
+}
+
+.loginEmpBtn, .loginClientBtn{
+    width: 150px;
+}
   

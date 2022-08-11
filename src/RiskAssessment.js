@@ -66,6 +66,7 @@ export default function Riskassessment() {
     const [count5, setCount5] = useState('0');
     const [count6, setCount6] = useState('0');
     const [count7, setCount7] = useState('0');
+    const [riskColor, setRiskColor] = useState('green');
     
     function calcResults() {
         let totalSum = Number(count1) +  Number(count2) + Number(count3)
@@ -81,14 +82,17 @@ export default function Riskassessment() {
             setRisk(" low");
             setVisible(true);
             setError(false);
+            setRiskColor("green");
         } else if (totalSum <= 21) {
             setRisk(" medium");
             setVisible(true);
             setError(false);
+            setRiskColor("yellow");
         } else {
             setRisk(" high");
             setVisible(true);
             setError(false);
+            setRiskColor("red");
         }
     }
 
@@ -96,7 +100,10 @@ export default function Riskassessment() {
 
         <div>
             <PortfolioNav />
-            <div className='wrapper'>
+            <div className='riskAssWrapper'>
+                <div className="riskAssHeader">
+                    Risk Assessment Quiz
+                </div>
                 <div>
                     <label class="label"> I plan on using the money I am investing:</label>
                     <Select options={options1} onChange={(e) => setCount1(e.value)}></Select>
@@ -139,7 +146,7 @@ export default function Riskassessment() {
                 <div class="riskLevel">
                     {visible && (<div class="riskLevel">
                         Your risk tolerance is:
-                        <text>
+                        <text style={{color:riskColor}}>
                             {risk}
                         </text>
                     </div>)}

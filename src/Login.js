@@ -8,6 +8,8 @@ import "./login.css";
 
 export default function() {
     const [user, setUser] = useContext(Context);
+    const [clientBtn, setClientBtn] = useState(true);
+    const [employeesBtn, setEsmployeesBtn] = useState(false);
     return (
         <div>
         <Link to="/performance" onClick={() => setUser("banker")}>
@@ -19,11 +21,19 @@ export default function() {
         <form className='loginForm'>
             <div className='wrapper'>
             <>
-                <ButtonGroup className="my-2" size="sm">
-                    <Button outline active>
+                <ButtonGroup className="my-2" size="sm" style={{width:"300px"}}>
+                    <Button outline 
+                    className="loginClientBtn"
+                    style={{width:"150px"}}
+                    onClick={() => {setClientBtn(!clientBtn); setEsmployeesBtn(!employeesBtn)}}
+                    active={clientBtn}>
                     Client
                     </Button>
-                    <Button outline>
+                    <Button outline
+                    className="loginEmpBtn"
+                    style={{width:"150px"}}
+                    onClick={() => {setClientBtn(!clientBtn); setEsmployeesBtn(!employeesBtn)}}
+                    active={employeesBtn}>
                     Employees
                     </Button>
                 </ButtonGroup>
