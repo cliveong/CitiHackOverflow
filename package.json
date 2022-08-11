@@ -6,6 +6,7 @@
   "author": "Ross Allen (https://github.com/ssorallen)",
   "homepage": "https://ssorallen.github.io/finance/",
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
     "@vx/axis": "^0.0.162",
     "@vx/gradient": "^0.0.161",
     "@vx/group": "^0.0.161",
@@ -41,6 +42,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.18.10",
     "flow-bin": "^0.134.0",
     "gh-pages": "^1.1.0",
     "prettier": "^2.1.2"
