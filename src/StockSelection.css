@@ -1,6 +1,7 @@
 .stockTable {
     margin: 10px;
     width: 100%;
+    table-layout: fixed;
 }
 
 .stocktr {
@@ -13,6 +14,8 @@
     width: 18%;
     height: 38px;
     font-size: 0.6rem;
+    white-space: normal;
+    overflow : auto;
 }
 
 .stocktr  th:first-child, .stocktr> td:first-child {
@@ -28,9 +31,26 @@
 }
 
 .stockEditBtn {
-    background-color: lightgray;
+    background-color: rgb(232, 228, 228);
     margin-right: 2px;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px 8px;
+    position: relative;
+    bottom: 1px;
+}
+
+.stockEditBtn:hover {
+    background-color: rgb(120, 120, 120);
+    margin-right: 2px;
+    font-size: 0.7rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px 8px;
+    position: relative;
+    bottom: 1px;
+    color: white;
 }
 
 .stockDeleteBtn {
