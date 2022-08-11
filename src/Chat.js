@@ -90,7 +90,8 @@ export default function Chat() {
     <div className="chat-wrapper">
       {toggled && <ChatRoom />}
       <Button onClick={handleToggle} className="chat-button">
-        {toggled ? "Close" : "Chat with " + user}
+        {toggled ? "Close " : "Chat with "}{" "}
+        {!toggled ? (user == "banker" ? "client" : "banker") : ""}
       </Button>
     </div>
   );
