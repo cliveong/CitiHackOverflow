@@ -169,15 +169,15 @@ export default function() {
             </table>
             <Modal isOpen={show}>
                   <ModalBody>
-                    <div class="label">
+                    <div class="sslabel">
                       <text>Stock</text>
                       <input onChange={(e) => setStk(e.target.value)}></input>
                     </div>
-                    <div class="label">
+                    <div class="sslabel">
                       <text>Comments</text>
                       <input onChange={(e) => setComment(e.target.value)}></input>
                     </div>
-                    <div class="label">
+                    <div class="sslabel">
                       <text>Risk level</text>
                       {dropDown()}
                     </div>

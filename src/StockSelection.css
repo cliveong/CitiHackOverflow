@@ -27,7 +27,7 @@
 .selectRisk {
     padding: 0;
     margin: 0;
-    width: 100px;
+    width: 290px;
 }
 
 .stockEditBtn {
@@ -58,8 +58,10 @@
     font-size: 0.6rem;
 }
 
-.label {
+.sslabel {
+    display: flex;
+    flex-direction: column;
     padding:5px 5px;
     margin:5px 5px;
-    width:100px;
+    width: 300px;
   }
