@@ -11,11 +11,7 @@ import ReactTable from "react-table";
 import { connect } from "react-redux";
 import cx from "classnames";
 import selectTableHOC from "react-table/lib/hoc/selectTable";
-import {
-  AdvancedChart,
-  CompanyProfile,
-  Timeline,
-} from "react-tradingview-embed";
+import { AdvancedChart, CompanyProfile, Timeline, StockMarket } from "react-tradingview-embed";
 
 type StateProps = {
   appSettings: AppSettings,
@@ -314,47 +310,63 @@ class Performance extends React.Component<Props, State> {
 
     const deleteDisabled = this.props.symbols.length === 0 || this.state.selectedSymbols.size === 0;
     return (
-      <> 
-            <PortfolioContainer
-        deleteDisabled={deleteDisabled}
-        onDelete={this.handleDeleteSelectedSymbols}
-      >
-        <Row className="mb-4">
+      <>
+        <Row>
           <Col>
-            <SelectReactTable
-              columns={TABLE_COLUMNS}
-              data={tableData}
-              defaultSorted={[{ desc: false, id: "symbol" }]}
-              getPaginationProps={() => ({
-                NextComponent: (props) => <Button className="btn-sm" outline {...props} />,
-                PreviousComponent: (props) => <Button className="btn-sm" outline {...props} />,
-                className: "pt-2",
-                showPageJump: false,
-              })}
-              isSelected={this.isSymbolSelected}
-              keyField="symbol"
-              noDataText="No symbols yet. Add one using the form below."
-              onPageSizeChange={this.handlePageSizeChange}
-              pageSize={this.props.appSettings.pageSize}
-              selectAll={this.isAllSymbolsSelected()}
-              selectType="checkbox"
-              toggleAll={this.handleToggleAllSymbols}
-              toggleSelection={this.handleToggleSymbolSelected}
+            <StockMarket
+              widgetPropsAny={{
+                feedMode: "all_symbols",
+                colorTheme: "light",
+                isTransparent: true,
+                displayMode: "adaptive",
+                width: "100%",
+                height: "600",
+                locale: "en",
+              }}
             />
           </Col>
         </Row>
-      </PortfolioContainer>       
-      <Timeline
-      widgetPropsAny={{
-        feedMode: "all_symbols",
-        colorTheme: "light",
-        isTransparent: false,
-        displayMode: "adaptive",
-        width: "100%",
-        height: "500",
-        locale: "en",
-      }}
-    /></>
+        <PortfolioContainer
+          deleteDisabled={deleteDisabled}
+          onDelete={this.handleDeleteSelectedSymbols}
+        >
+          <Row className="mb-4">
+            <Col>
+              <SelectReactTable
+                columns={TABLE_COLUMNS}
+                data={tableData}
+                defaultSorted={[{ desc: false, id: "symbol" }]}
+                getPaginationProps={() => ({
+                  NextComponent: (props) => <Button className="btn-sm" outline {...props} />,
+                  PreviousComponent: (props) => <Button className="btn-sm" outline {...props} />,
+                  className: "pt-2",
+                  showPageJump: false,
+                })}
+                isSelected={this.isSymbolSelected}
+                keyField="symbol"
+                noDataText="No symbols yet. Add one using the form below."
+                onPageSizeChange={this.handlePageSizeChange}
+                pageSize={this.props.appSettings.pageSize}
+                selectAll={this.isAllSymbolsSelected()}
+                selectType="checkbox"
+                toggleAll={this.handleToggleAllSymbols}
+                toggleSelection={this.handleToggleSymbolSelected}
+              />
+            </Col>
+          </Row>
+        </PortfolioContainer>
+        <Timeline
+          widgetPropsAny={{
+            feedMode: "all_symbols",
+            colorTheme: "light",
+            isTransparent: false,
+            displayMode: "adaptive",
+            width: "100%",
+            height: "500",
+            locale: "en",
+          }}
+        />
+      </>
     );
   }
 }

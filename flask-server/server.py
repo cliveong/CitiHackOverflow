@@ -5,7 +5,6 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 CORS(app)
 import os
-import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
 import pandas as pd
 from urllib.request import urlopen, Request

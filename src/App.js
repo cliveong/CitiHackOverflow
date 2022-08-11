@@ -8,8 +8,7 @@ import Navbar from "./Navbar";
 import SpinKit from "./SpinKit";
 import { fetchAllQuotes } from "./actions";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
-import axios from "axios";
+import Chat from "./Chat";
 
 // const Overview = React.lazy(() => import("./Overview"));
 const Performance = React.lazy(() => import("./Performance"));
@@ -57,9 +56,10 @@ export default function App(): React.Node {
           <Container>
             <Row>
               <Col>
-                <small className="text-secondary">
-                  Created by AlphaLab
-                </small>
+                <div className="App">
+                  <header></header>
+                </div>
+                <small className="text-secondary">Created by AlphaLab</small>
               </Col>
             </Row>
             <Row>
@@ -74,6 +74,7 @@ export default function App(): React.Node {
             </Row>
           </Container>
         </footer>
+        <Chat />
       </div>
     </Router>
   );

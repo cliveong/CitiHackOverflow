@@ -18,7 +18,7 @@ import {
   AdvancedChart,
   CompanyProfile,
   Timeline,
-  TechnicalAnalysis
+  TechnicalAnalysis,
 } from "react-tradingview-embed";
 import { Group } from "@vx/group";
 import { LinearGradient } from "@vx/gradient";
@@ -39,15 +39,6 @@ function SummaryListItem({ title, value }: { title: string, value: string }) {
     </li>
   );
 }
-var risk = "No Risk"
-function handlePrediction(stock) {
-  axios.post("http://localhost:5001/sentiment", {"stock": stock})
-  .then((response) => {
-    console.log(response.data.sentiment)
-    risk = response.data.sentiment
-  })
-  return risk
-}
 
 const width = 635;
 const height = 400;
@@ -65,7 +56,7 @@ const xMax = width - margin.left - margin.right;
 const yMax = height - margin.top - margin.bottom;
 
 export default function Stock({ match }: Props): React.Node {
-  const [allEvents, setAllEvents] = React.useState([])
+  const [allEvents, setAllEvents] = React.useState([]);
   const dispatch = useDispatch<Dispatch>();
   const chart = useSelector((state) => state.charts[match.params.symbol]);
   const quote = useSelector((state) => state.quotes[match.params.symbol]);
@@ -73,7 +64,22 @@ export default function Stock({ match }: Props): React.Node {
   React.useEffect(() => {
     dispatch(fetchSymbolData(match.params.symbol));
   }, [dispatch, match.params.symbol]);
-  var stock = ""
+
+  const [test, setTest] = useState("fetching...");
+  async function handlePrediction(stock) {
+    console.log("hahah", stock);
+    await axios.post("http://localhost:5001/sentiment", { stock: stock }).then((response) => {
+      console.log(response.data.sentiment);
+      console.log("hahaha");
+      setTest(response.data.sentiment);
+    });
+  }
+
+  React.useEffect(() => {
+    handlePrediction(match.params.symbol);
+  }, []);
+
+  var stock = "";
   let xScale;
   let yScale;
   if (chart != null) {
@@ -113,7 +119,7 @@ export default function Stock({ match }: Props): React.Node {
           <ul className="list-unstyled">
             <SummaryListItem
               title="Predicted Risk Sentiment"
-              value={quote == null ? "..." : String(handlePrediction(match.params.symbol))}
+              value={quote == null ? "..." : String(test)}
             />
             <SummaryListItem
               title="Volume"
@@ -164,39 +170,39 @@ export default function Stock({ match }: Props): React.Node {
         <Col className="border-top border-top-lg pt-2" md={{ offset: 1, size: 7 }}>
           <h4 className="mb-3">History</h4>
           <Col span={24} xl={{ span: 12 }}>
-          <CompanyProfile
-            widgetPropsAny={{
-              symbol: match.params.symbol,
-              colorTheme: "light",
-              isTransparent: false,
-              locale: "en",
-              width: "100%",
-              popup_height: "650",
-              popup_width: "1000",
-              height: "300",
-            }}
-          />
-          <AdvancedChart
-            widgetPropsAny={{
-              symbol: match.params.symbol,
-              width: "100%",
-              interval: "D",
-              timezone: "Asia/Singapore",
-              theme: "light",
-              style: "1",
-              locale: "en",
-              toolbar_bg: "#f1f3f6",
-              enable_publishing: false,
-              withdateranges: true,
-              allow_symbol_change: true,
-              show_popup_button: true,
-              popup_width: "1000",
-              popup_height: "650",
-              hide_side_toolbar: true,
-              height: "400"
-            }}
-          />
-        </Col>
+            <CompanyProfile
+              widgetPropsAny={{
+                symbol: match.params.symbol,
+                colorTheme: "light",
+                isTransparent: false,
+                locale: "en",
+                width: "100%",
+                popup_height: "650",
+                popup_width: "1000",
+                height: "300",
+              }}
+            />
+            <AdvancedChart
+              widgetPropsAny={{
+                symbol: match.params.symbol,
+                width: "100%",
+                interval: "D",
+                timezone: "Asia/Singapore",
+                theme: "light",
+                style: "1",
+                locale: "en",
+                toolbar_bg: "#f1f3f6",
+                enable_publishing: false,
+                withdateranges: true,
+                allow_symbol_change: true,
+                show_popup_button: true,
+                popup_width: "1000",
+                popup_height: "650",
+                hide_side_toolbar: true,
+                height: "400",
+              }}
+            />
+          </Col>
         </Col>
       </Row>
     </Container>
