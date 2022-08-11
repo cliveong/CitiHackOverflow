@@ -52,7 +52,7 @@ const TABLE_COLUMNS = [
   },
   {
     accessor: "risk",
-    Cell: "High",
+    Cell: (props) => (props.value == null ? "..." : props.value),
     Header: "Risk",
     headerClassName: "text-left",
   },
@@ -291,6 +291,7 @@ class Performance extends React.Component<Props, State> {
       // Show returns only if the user owns shares and the quote has been returned from the API call.
       // Showing any earlier will look like some erroneous and funky data.
       const showReturns = totalShares > 0 && quote != null;
+      const risk = "High";
       return {
         change: {
           change: quote == null ? null : quote.change,
@@ -305,6 +306,7 @@ class Performance extends React.Component<Props, State> {
         marketValue: showReturns ? marketValue : null,
         shares: totalShares,
         symbol,
+        risk,
       };
     });
 

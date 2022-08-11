@@ -6,6 +6,7 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import ReactDOM from "react-dom";
 import { Pie, measureTextWidth } from "@ant-design/plots";
 import { Context } from "./Context";
+import axios from "axios";
 
 const riskLevels = [
   { value: "1", label: "" },
@@ -32,10 +33,18 @@ export default function () {
     );
   }
 
-  function addData() {
+  async function addData() {
+    const beta = await handlePrediction(stk);
     setData([
       ...data,
-      { index: data.length + 1, ticker: stk, risk: risk, date: currDate, comment: comment },
+      {
+        index: data.length + 1,
+        ticker: stk,
+        risk: risk,
+        date: currDate,
+        comment: comment,
+        beta: beta,
+      },
     ]);
     setShow(false);
     // console.log(data);
@@ -50,7 +59,6 @@ export default function () {
     newData.forEach((element) => {
       element.index = newData.indexOf(element, 0) + 1;
     });
-    console.log(newData);
     setData(newData);
   }
 
@@ -61,6 +69,16 @@ export default function () {
   const [stk, setStk] = useState("");
   const [comment, setComment] = useState("");
   const [risk, setRisk] = useState("High");
+
+  async function handlePrediction(stock) {
+    console.log("hahah", stock);
+    const beta = await axios
+      .post("http://localhost:8080/betas", { stocks: [stock] })
+      .then((res) => {
+        return res.data[0].beta;
+      });
+    return beta;
+  }
 
   return (
     <div>
@@ -80,6 +98,7 @@ export default function () {
             <th>Risk Level</th>
             <th>Date Added</th>
             <th>Comments</th>
+            <th>Beta</th>
             <th></th>
           </tr>
         </thead>
@@ -91,6 +110,7 @@ export default function () {
               <td>{stock.risk}</td>
               <td>{stock.date}</td>
               <td>{stock.comment}</td>
+              <td>{stock.beta}</td>
               <td>{buttons(stock.index)}</td>
             </tr>
           </tbody>
@@ -112,7 +132,7 @@ export default function () {
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={addData}>Add</Button>
+          <Button onClick={async (e) => addData(e)}>Add</Button>
           <Button onClick={() => setShow(false)}>Close</Button>
         </ModalFooter>
       </Modal>

@@ -21,7 +21,7 @@ export default function Chat() {
   const [user] = useContext(Context);
   const fakeName = user;
   function ChatRoom() {
-    // const dummy = React.useRef()
+    const dummy = React.useRef();
 
     const [messages, setMessages] = React.useState("");
     const [docRef, setDocRef] = React.useState("");
@@ -36,29 +36,34 @@ export default function Chat() {
       // l = query.docs.sort((a, b) => (a.data().createdAt > b.data().createdAt) ? 1 : -1)
       setMessages(l.map((doc) => doc.data()));
     }
+
     React.useEffect(() => {
       fetchData();
     }, [docRef]);
+    React.useEffect(() => {
+      dummy.current.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
     const [formValue, setFormValue] = React.useState("");
 
     const sendMessage = async (e) => {
       e.preventDefault();
-
-      setDocRef(
-        await addDoc(messagesRef, {
-          text: formValue,
-          createdAt: Date(),
-          user: fakeName,
-        })
-      );
+      if (formValue != "") {
+        setDocRef(
+          await addDoc(messagesRef, {
+            text: formValue,
+            createdAt: Date(),
+            user: fakeName,
+          })
+        );
+      }
 
       setFormValue("");
-      // dummy.current.scrollIntoView({behavior: 'smooth'})
     };
     return (
       <div className="chat-window">
         <div className="chat-messages">
           {messages && messages.map((msg) => <ChatMessage key={msg.user} message={msg} />)}
+          <div ref={dummy} />
         </div>
         <hr style={{ margin: 0 }} />
         <div className="chat-form-wrapper">

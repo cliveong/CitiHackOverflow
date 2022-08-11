@@ -22,21 +22,27 @@ export default function PortfolioNav(): React.Node {
             News
           </NavLink>
         </NavItem>
-        <NavItem>
-          <NavLink className="nav-link" to="/performance">
-            Performance
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink className="nav-link" to="/transactions">
-            Transactions
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink className="nav-link" to="/riskassessment">
-            Risk Assessment
-          </NavLink>
-        </NavItem>
+        {user == "client" && (
+          <NavItem>
+            <NavLink className="nav-link" to="/performance">
+              Performance
+            </NavLink>
+          </NavItem>
+        )}
+        {user == "client" && (
+          <NavItem>
+            <NavLink className="nav-link" to="/transactions">
+              Transactions
+            </NavLink>
+          </NavItem>
+        )}
+        {user == "client" && (
+          <NavItem>
+            <NavLink className="nav-link" to="/riskassessment">
+              Risk Assessment
+            </NavLink>
+          </NavItem>
+        )}
         {user == "client" && (
           <NavItem>
             <NavLink className="nav-link" to="/recommendations">

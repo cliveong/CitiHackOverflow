@@ -59,7 +59,7 @@ export default function () {
             <Button className="Forget">Forgot Username/Password</Button>
           </div>
           <Link
-            to="/performance"
+            to={clientBtn ? "/performance" : "news"}
             onClick={() => (clientBtn ? setUser("client") : setUser("banker"))}
           >
             <Button className="Login">Login</Button>

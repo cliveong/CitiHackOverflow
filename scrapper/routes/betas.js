@@ -4,7 +4,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const beta_data = [];
   let status = 404;
 
@@ -30,10 +30,7 @@ router.get("/", async (req, res) => {
             .children(".screener-body-table-nw")
             .children(".screener-link-primary")
             .text();
-          temp_beta = $(item)
-            .children(".screener-body-table-nw")
-            .children(".screener-link")
-            .text();
+          temp_beta = $(item).children(".screener-body-table-nw").children(".screener-link").text();
           beta_object = {
             ticker: temp_ticker,
             beta: temp_beta,

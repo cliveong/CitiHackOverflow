@@ -35,7 +35,14 @@ function LoadingIndicator() {
 export default function App(): React.Node {
   const [user, setUser] = React.useState(false);
   const [data, setData] = React.useState([
-    { index: 1, ticker: "GME", risk: "High", date: "11/8/22", comment: "Do not buy" },
+    {
+      index: 1,
+      ticker: "GME",
+      risk: "Low",
+      date: "11/8/22",
+      comment: "Do not buy",
+      beta: "-0.80",
+    },
   ]);
   const dispatch = useDispatch<Dispatch>();
   React.useEffect(() => {
@@ -116,7 +123,7 @@ export default function App(): React.Node {
               )}
             />
           </React.Suspense>
-          <footer className="bg-light py-4">
+          {/* <footer className="bg-light py-4">
             <Container>
               <Row>
                 <Col>
@@ -137,7 +144,7 @@ export default function App(): React.Node {
                 </Col>
               </Row>
             </Container>
-          </footer>
+          </footer> */}
           <Chat />
         </div>
       </Router>

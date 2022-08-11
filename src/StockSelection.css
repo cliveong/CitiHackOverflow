@@ -11,9 +11,8 @@
 
 .stocktr th:nth-last-child(-n + 5),
 .stocktr > td:nth-last-child(-n + 5) {
-  width: 18%;
+  width: 12%;
   height: 38px;
-  font-size: 0.6rem;
   white-space: normal;
   overflow: auto;
 }
@@ -22,7 +21,6 @@
 .stocktr > td:first-child {
   width: 10%;
   height: 38px;
-  font-size: 0.6rem;
 }
 
 .selectRisk {

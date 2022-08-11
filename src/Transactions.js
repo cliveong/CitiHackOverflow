@@ -41,12 +41,6 @@ const TABLE_COLUMNS = [
   },
   { accessor: "type", Header: "Type", headerClassName: "text-left" },
   {
-    accessor: "date",
-    Cell: (props) => <time>{props.value}</time>,
-    Header: "Date",
-    headerClassName: "text-left",
-  },
-  {
     accessor: "shares",
     Cell: (props) => (
       <div className="text-right">

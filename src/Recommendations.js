@@ -89,7 +89,7 @@ export default function () {
       <PortfolioNav />
       <div className="stockDonutContainer">{DemoPie()}</div>
       <div style={{ paddingTop: "100px" }}>
-        <text>Recommendations: </text>
+        <text>Recommendations</text>
         <table className="stockTable">
           <thead className="stockthead">
             <tr className="stocktheadtr stocktr">
@@ -98,7 +98,7 @@ export default function () {
               <th>Risk Level</th>
               <th>Date Added</th>
               <th>Comments</th>
-              <th></th>
+              <th>Beta</th>
             </tr>
           </thead>
           {data.map((stock) => (
@@ -109,6 +109,7 @@ export default function () {
                 <td>{stock.risk}</td>
                 <td>{stock.date}</td>
                 <td>{stock.comment}</td>
+                <td>{stock.beta}</td>
               </tr>
             </tbody>
           ))}
