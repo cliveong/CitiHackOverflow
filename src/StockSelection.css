@@ -1,0 +1,68 @@
+.stockTable {
+  margin: 10px;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.stocktr {
+  border-top: 0.5px solid lightgrey;
+  width: 100%;
+}
+
+.stocktr th:nth-last-child(-n + 5),
+.stocktr > td:nth-last-child(-n + 5) {
+  width: 18%;
+  height: 38px;
+  font-size: 0.6rem;
+  white-space: normal;
+  overflow: auto;
+}
+
+.stocktr th:first-child,
+.stocktr > td:first-child {
+  width: 10%;
+  height: 38px;
+  font-size: 0.6rem;
+}
+
+.selectRisk {
+  padding: 0;
+  margin: 0;
+  width: 290px;
+}
+
+.stockEditBtn {
+  background-color: rgb(232, 228, 228);
+  margin-right: 2px;
+  font-size: 0.7rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 3px 8px;
+  position: relative;
+  bottom: 1px;
+}
+
+.stockEditBtn:hover {
+  background-color: rgb(120, 120, 120);
+  margin-right: 2px;
+  font-size: 0.7rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 3px 8px;
+  position: relative;
+  bottom: 1px;
+  color: white;
+}
+
+.stockDeleteBtn {
+  background-color: red;
+  font-size: 0.6rem;
+}
+
+.sslabel {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 5px;
+  margin: 5px 5px;
+  width: 300px;
+}

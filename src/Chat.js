@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "./Context";
 import { initializeApp } from "firebase/app";
 import "firebase/firestore";
 import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore/lite";
@@ -15,9 +16,10 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const fakeName = "Ivan";
 
 export default function Chat() {
+  const [user] = useContext(Context);
+  const fakeName = user;
   function ChatRoom() {
     // const dummy = React.useRef()
 
@@ -73,7 +75,6 @@ export default function Chat() {
     const { text, user, photoURL } = props.message;
 
     const messageClass = user === fakeName ? "sent" : "received";
-    console.log(user);
     return (
       <div className={`message ${messageClass}`}>
         <p className="message-bubble">{text}</p>
@@ -89,7 +90,7 @@ export default function Chat() {
     <div className="chat-wrapper">
       {toggled && <ChatRoom />}
       <Button onClick={handleToggle} className="chat-button">
-        {toggled ? "Close" : "Chat with Ivan"}
+        {toggled ? "Close" : "Chat with " + user}
       </Button>
     </div>
   );

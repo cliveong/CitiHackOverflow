@@ -170,7 +170,7 @@ class Navbar extends React.Component<Props, State> {
     const { fetchErrorMessage, updatedAt } = this.props;
     return (
       <ReactstrapNavbar color="dark" dark expand="md">
-        <NavbarBrand className="text-warning" tag={NavLink} to="/">
+        <NavbarBrand className="text-warning" tag={NavLink} to="/performance">
           Investr.io
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />

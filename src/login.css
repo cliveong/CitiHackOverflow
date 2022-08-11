@@ -1,0 +1,86 @@
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs > input {
+  width: 300px;
+  margin: 0 0 20px 0;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.inputs > input[type="text"] {
+  margin-top: 10px;
+}
+.Login {
+  background-color: lightblue;
+  display: block;
+  margin: 0 0 20px 0;
+  width: 300px;
+}
+
+.Forget {
+  display: block;
+  font-size: 0.6rem;
+  margin: 0 0 5px 0;
+  background-color: white;
+  color: blue;
+  text-decoration: underline;
+  padding: 0;
+  border: none;
+}
+
+.Forget:hover {
+  display: block;
+  font-size: 0.6rem;
+  margin: 0 0 5px 0;
+  background-color: white;
+  color: blue;
+  text-decoration: underline;
+  padding: 0;
+  border: none;
+}
+
+.loginForm {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.flexRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flexRow label {
+  font-size: 0.7rem;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  top: 3.5px;
+  left: 2px;
+}
+
+.wrapper {
+  width: 400px;
+  padding: 50px;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
+  margin: 50px;
+}
+
+.loginEmpBtn,
+.loginClientBtn {
+  width: 150px;
+}
+
+.title {
+  color: rgb(247, 182, 3);
+  font-size: 3rem;
+  width: 300px;
+  text-align: center;
+  margin-bottom: 50px;
+}

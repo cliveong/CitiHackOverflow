@@ -311,21 +311,6 @@ class Performance extends React.Component<Props, State> {
     const deleteDisabled = this.props.symbols.length === 0 || this.state.selectedSymbols.size === 0;
     return (
       <>
-        <Row>
-          <Col>
-            <StockMarket
-              widgetPropsAny={{
-                feedMode: "all_symbols",
-                colorTheme: "light",
-                isTransparent: true,
-                displayMode: "adaptive",
-                width: "100%",
-                height: "600",
-                locale: "en",
-              }}
-            />
-          </Col>
-        </Row>
         <PortfolioContainer
           deleteDisabled={deleteDisabled}
           onDelete={this.handleDeleteSelectedSymbols}
@@ -355,17 +340,6 @@ class Performance extends React.Component<Props, State> {
             </Col>
           </Row>
         </PortfolioContainer>
-        <Timeline
-          widgetPropsAny={{
-            feedMode: "all_symbols",
-            colorTheme: "light",
-            isTransparent: false,
-            displayMode: "adaptive",
-            width: "100%",
-            height: "500",
-            locale: "en",
-          }}
-        />
       </>
     );
   }
